@@ -6,12 +6,15 @@ const authenticate = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { id, role }
+    console.log("✅ JWT Payload:", decoded); // 👈 Add this
+    req.user = decoded;
     next();
-  } catch {
+  } catch (err) {
+    console.error("❌ JWT Error:", err.message); // 👈 And this
     res.status(401).json({ message: 'Invalid token' });
   }
 };
+
 
 const authorizeRoles = (...roles) => (req, res, next) => {
   if (!roles.includes(req.user.role)) {

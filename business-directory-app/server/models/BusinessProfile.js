@@ -18,7 +18,13 @@ const businessProfileSchema = new mongoose.Schema({
       price: Number,
       availability: Boolean
     }
-  ]
+  ],
+  financialStats: {
+    revenue: [{ year: Number, amount: Number }],
+    cagr: Number,
+    roi: Number,
+    profitMargin: Number
+  }
 });
 
 module.exports = mongoose.model('BusinessProfile', businessProfileSchema);
